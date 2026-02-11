@@ -34,7 +34,9 @@ public class TaskController {
             @RequestParam(required = false) Boolean completed,
             @RequestParam(required = false) String keyword,
             @RequestParam(required = false) String sort) {
-        if (priority != null) {
+        if (priority != null && completed != null) {
+            return taskService.getByPriorityAndCompleted(priority, completed);
+        } else if (priority != null) {
             return taskService.getTasksByPriority(priority);
         } else if (completed != null) {
             return taskService.getTasksByCompleted(completed);

@@ -64,4 +64,8 @@ public class TaskService {
         return taskRepository.findByTitleContainingIgnoreCase(keyword);
     }
 
+    public List<Task> getByPriorityAndCompleted(Priority priority, boolean completed) {
+        return taskRepository.findByPriorityAndCompleted(priority, completed);
+    }
+
 }
