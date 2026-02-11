@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Task Tracker</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>SpringBoot Task Tracker</h1>
+        <p class="subtitle">Track your tasks. App by Ben.</p>
+
+        <div id="controls">
+            <input type="text" id="search" placeholder="Search tasks...">
+            <select id="filter-priority">
+                <option value="">All Priorities</option>
+                <option value="HIGH">High</option>
+                <option value="MEDIUM">Medium</option>
+                <option value="LOW">Low</option>
+            </select>
+            <select id="filter-completed">
+                <option value="">All Tasks</option>
+                <option value="false">Active</option>
+                <option value="true">Completed</option>
+            </select>
+            <select id="sort-by">
+                <option value="">Sort By</option>
+                <option value="dueDate">Due Date</option>
+                <option value="priority">Priority</option>
+                <option value="createdAt">Date Created</option>
+            </select>
+        </div>
+
+        <form id="task-form">
+            <input type="text" id="title" placeholder="Task title..." required>
+            <input type="text" id="description" placeholder="Task description...">
+            <select id="category">
+                <option value="">Select Category</option>
+                <option value="WORK">Work</option>
+                <option value="PERSONAL">Personal</option>
+                <option value="STUDY">Study</option>
+                <option value="HEALTH">Health</option>
+                <option value="FINANCE">Finance</option>
+            </select>
+            <select id="priority">
+                <option value="">Select Priority</option>
+                <option value="HIGH">High</option>
+                <option value="MEDIUM">Medium</option>
+                <option value="LOW">Low</option>
+            </select>
+            <input type="date" id="dueDate">
+            <button type="submit">Add Task</button>
+        </form>
+
+        <p class="task-count" id="task-count"></p>
+        <div id="task-list"></div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

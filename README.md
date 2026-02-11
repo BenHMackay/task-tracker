@@ -1,15 +1,20 @@
-# Task Tracker API
+# Task Tracker
 
-A practice Spring Boot REST API for task management.
+A full-stack task management application built with Spring Boot and vanilla JavaScript.
 
 ## Features
 - Full CRUD operations (Create, Read, Update, Delete)
 - Task priority levels (HIGH, MEDIUM, LOW)
+- Task categories (WORK, PERSONAL, STUDY, HEALTH, FINANCE)
+- Task descriptions
 - Due dates
-- Filter tasks by priority or completion status
-- Input validation
-- Custom exception handling
+- Auto-timestamps (createdAt, updatedAt)
+- Filter tasks by priority, completion status, or both combined
+- Search tasks by title (case-insensitive)
+- Sort by due date, priority, or date created
+- Input validation with custom exception handling
 - Layered architecture (Controller → Service → Repository)
+- Frontend UI with live filtering, search, and task management
 
 ## Technologies Used
 - Java 21
@@ -17,11 +22,8 @@ A practice Spring Boot REST API for task management.
 - Spring Data JPA
 - H2 Database
 - Maven
+- HTML / CSS / JavaScript
 
-## Still working on
-- Search tasks by title
-- Sort by due date/priority
-- Task categories
-- Task descriptions
-- Auto-timestamps
-- Frontend UI
+## Future Improvements
+- DTOs (Data Transfer Objects) for API security
+- Additional validation on priority and due date fields
