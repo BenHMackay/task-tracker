@@ -4,7 +4,7 @@ A full-stack task management application built with Spring Boot and vanilla Java
 
 Built as a learning project during the Version 1 Digital Skills Academy.
 
-![Task Tracker Screenshot](images/screenshot.png)
+<img src="images/screenshot.png" alt="Task Tracker Screenshot" width="400">
 
 ## Features
 - Full CRUD operations (Create, Read, Update, Delete)
@@ -14,12 +14,12 @@ Built as a learning project during the Version 1 Digital Skills Academy.
 - Due dates with overdue detection
 - Auto-timestamps (createdAt, updatedAt)
 - Filter tasks by priority, completion status, or both combined
-- Search tasks by title (case-insensitive)
+- Search tasks by title
 - Sort by due date, priority, or date created
 - Inline task editing
-- Input validation with custom exception handling
+- Input validation with exception handling
 - Layered architecture (Controller → Service → Repository)
-- Clean, responsive frontend UI
+- Simple, responsive frontend-UI
 
 ## Technologies Used
 - Java 21
@@ -28,8 +28,9 @@ Built as a learning project during the Version 1 Digital Skills Academy.
 - H2 In-Memory Database
 - Maven
 - HTML / CSS / JavaScript
+- VS Code
 
-## Getting Started
+## Setup
 
 ### Prerequisites
 - Java 21 or higher installed
@@ -53,7 +54,7 @@ cd task-tracker
 http://localhost:8080
 ```
 
-That's it! The app uses an in-memory H2 database so no database setup is needed. Note that data resets when the app restarts.
+That's it. The app uses an in-memory H2 database so no database setup is needed. Note that data resets when the app restarts. This was by design as it was better suited for learning.
 
 ### API Endpoints
 
@@ -88,7 +89,6 @@ POST /tasks
 ```
 
 ## Future Improvements
-- DTOs (Data Transfer Objects) for API security
-- Unit and integration tests
+- DTOs for better security. As a side project this didn't feel necessary.
 - Additional validation on priority and due date fields
-- Persistent database (PostgreSQL/MySQL)
+- Might add a Persistent database down the line
