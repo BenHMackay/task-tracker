@@ -20,6 +20,8 @@ public class Task {
 
     private Priority priority;
 
+    private Category category;
+
     public Task() {
 
     }
@@ -67,6 +69,14 @@ public class Task {
 
     public void setPriority(Priority priority) {
         this.priority = priority;
+    }
+
+    public Category getCategory() {
+        return this.category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
 }
