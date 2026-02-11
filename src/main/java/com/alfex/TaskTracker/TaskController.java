@@ -20,7 +20,7 @@ import java.util.List;
 @RestController
 public class TaskController {
 
-    // Inject task repository for database access
+    // Inject task service for database access
     private final TaskService taskService;
 
     public TaskController(TaskService taskService) {
