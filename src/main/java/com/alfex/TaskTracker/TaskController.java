@@ -32,13 +32,16 @@ public class TaskController {
     public List<Task> getAllTasks(
             @RequestParam(required = false) Priority priority,
             @RequestParam(required = false) Boolean completed,
-            @RequestParam(required = false) String keyword) {
+            @RequestParam(required = false) String keyword,
+            @RequestParam(required = false) String sort) {
         if (priority != null) {
             return taskService.getTasksByPriority(priority);
         } else if (completed != null) {
             return taskService.getTasksByCompleted(completed);
         } else if (keyword != null) {
             return taskService.getTasksByTitle(keyword);
+        } else if (sort != null) {
+            return taskService.getallTasksSorted(sort);
         } else {
             return taskService.getAllTasks();
         }

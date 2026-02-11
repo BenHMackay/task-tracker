@@ -1,6 +1,7 @@
 package com.alfex.TaskTracker;
 
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
@@ -14,6 +15,10 @@ public class TaskService {
 
     public List<Task> getAllTasks() {
         return taskRepository.findAll();
+    }
+
+    public List<Task> getallTasksSorted(String sort) {
+        return taskRepository.findAll(Sort.by(sort));
     }
 
     public Task getTaskById(Long id) {
@@ -54,7 +59,7 @@ public class TaskService {
     }
 
     public List<Task> getTasksByTitle(String keyword) {
-        return taskRepository.findByTitleContaining(keyword);
+        return taskRepository.findByTitleContainingIgnoreCase(keyword);
     }
 
 }

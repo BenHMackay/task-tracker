@@ -8,6 +8,6 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
 
     List<Task> findByCompleted(boolean completed);
 
-    List<Task> findByTitleContaining(String keyword);
+    List<Task> findByTitleContainingIgnoreCase(String keyword);
 
 }
