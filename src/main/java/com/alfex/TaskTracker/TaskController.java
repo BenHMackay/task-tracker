@@ -31,11 +31,14 @@ public class TaskController {
     @GetMapping("/tasks")
     public List<Task> getAllTasks(
             @RequestParam(required = false) Priority priority,
-            @RequestParam(required = false) Boolean completed) {
+            @RequestParam(required = false) Boolean completed,
+            @RequestParam(required = false) String keyword) {
         if (priority != null) {
             return taskService.getTasksByPriority(priority);
         } else if (completed != null) {
             return taskService.getTasksByCompleted(completed);
+        } else if (keyword != null) {
+            return taskService.getTasksByTitle(keyword);
         } else {
             return taskService.getAllTasks();
         }

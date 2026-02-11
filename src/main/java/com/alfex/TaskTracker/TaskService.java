@@ -53,4 +53,8 @@ public class TaskService {
         return taskRepository.findByCompleted(completed);
     }
 
+    public List<Task> getTasksByTitle(String keyword) {
+        return taskRepository.findByTitleContaining(keyword);
+    }
+
 }
