@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
+import org.springframework.context.annotation.Description;
+
 @Entity
 public class Task {
 
@@ -14,13 +16,15 @@ public class Task {
     @NotBlank(message = "Title cannot be empty")
     private String title;
 
-    private boolean completed;
+    private String description;
+
+    private Category category;
 
     private LocalDate dueDate;
 
     private Priority priority;
 
-    private Category category;
+    private boolean completed;
 
     public Task() {
 
@@ -77,6 +81,14 @@ public class Task {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
 }

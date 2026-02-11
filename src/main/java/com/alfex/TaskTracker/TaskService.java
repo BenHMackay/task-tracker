@@ -39,6 +39,7 @@ public class TaskService {
                     task.setDueDate(updatedTask.getDueDate());
                     task.setPriority(updatedTask.getPriority());
                     task.setCategory(updatedTask.getCategory());
+                    task.setDescription(updatedTask.getDescription());
                     return taskRepository.save(task);
                 })
                 .orElseThrow(() -> new TaskNotFoundException(id));
