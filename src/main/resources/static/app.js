@@ -44,7 +44,7 @@ function displayTasks(tasks) {
         taskList.innerHTML = `
             <div class="empty-state">
                 <div class="empty-state-icon">📋</div>
-                <p class="empty-state-text">No tasks currently. Add one above!</p>
+                <p class="empty-state-text">No tasks currently</p>
             </div>
         `;
         taskCount.textContent = '';
@@ -67,10 +67,14 @@ function displayTasks(tasks) {
                     ${task.priority ? `<span class="tag tag-priority-${task.priority.toLowerCase()}">${task.priority}</span>` : ''}
                     ${task.category ? `<span class="tag tag-category">${task.category}</span>` : ''}
                     ${task.dueDate ? `<span class="tag ${isOverdue(task.dueDate, task.completed) ? 'tag-overdue' : 'tag-due'}">${formatDate(task.dueDate)}</span>` : ''}
+                    ${task.createdAt ? `<span class="tag tag-due">Created ${formatDateTime(task.createdAt)}</span>` : ''}
+                    ${task.updatedAt ? `<span class="tag tag-due">Updated ${formatDateTime(task.updatedAt)}</span>` : ''}
                 </div>
             </div>
             <div class="task-actions">
+            <button class="btn-action" onclick="editTask(${task.id})" title="Edit">✏️</button>
                 <button class="btn-action btn-delete" onclick="deleteTask(${task.id})" title="Delete">🗑</button>
+                
             </div>
         </div>
     `).join('');
@@ -144,6 +148,70 @@ async function deleteTask(id) {
     }
 }
 
+async function editTask(id) {
+    try {
+        const response = await fetch(`${API}/${id}`);
+        const task = await response.json();
+
+        const card = document.querySelector(`.task-card[data-id="${id}"]`);
+        card.innerHTML = `
+            <div class="edit-form">
+                <input type="text" id="edit-title-${id}" value="${escapeHtml(task.title)}" placeholder="Title">
+                <input type="text" id="edit-desc-${id}" value="${task.description ? escapeHtml(task.description) : ''}" placeholder="Description">
+                <select id="edit-category-${id}">
+                    <option value="">Select Category</option>
+                    <option value="WORK" ${task.category === 'WORK' ? 'selected' : ''}>Work</option>
+                    <option value="PERSONAL" ${task.category === 'PERSONAL' ? 'selected' : ''}>Personal</option>
+                    <option value="STUDY" ${task.category === 'STUDY' ? 'selected' : ''}>Study</option>
+                    <option value="HEALTH" ${task.category === 'HEALTH' ? 'selected' : ''}>Health</option>
+                    <option value="FINANCE" ${task.category === 'FINANCE' ? 'selected' : ''}>Finance</option>
+                </select>
+                <select id="edit-priority-${id}">
+                    <option value="">Select Priority</option>
+                    <option value="HIGH" ${task.priority === 'HIGH' ? 'selected' : ''}>High</option>
+                    <option value="MEDIUM" ${task.priority === 'MEDIUM' ? 'selected' : ''}>Medium</option>
+                    <option value="LOW" ${task.priority === 'LOW' ? 'selected' : ''}>Low</option>
+                </select>
+                <input type="date" id="edit-date-${id}" value="${task.dueDate || ''}">
+                <div class="edit-actions">
+                    <button class="btn-save" onclick="saveTask(${id})">Save</button>
+                    <button class="btn-cancel" onclick="loadTasks()">Cancel</button>
+                </div>
+            </div>
+        `;
+    } catch (error) {
+        console.error('Error loading task for edit:', error);
+    }
+}
+
+async function saveTask(id) {
+    const task = {
+        title: document.getElementById(`edit-title-${id}`).value.trim(),
+        description: document.getElementById(`edit-desc-${id}`).value.trim() || null,
+        category: document.getElementById(`edit-category-${id}`).value || null,
+        priority: document.getElementById(`edit-priority-${id}`).value || null,
+        dueDate: document.getElementById(`edit-date-${id}`).value || null,
+        completed: false
+    };
+
+    try {
+        const response = await fetch(`${API}/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(task)
+        });
+
+        if (response.ok) {
+            loadTasks();
+        } else {
+            const error = await response.text();
+            alert(error);
+        }
+    } catch (error) {
+        console.error('Error saving task:', error);
+    }
+}
+
 // ===== EVENT LISTENERS FOR FILTERS =====
 searchInput.addEventListener('input', debounce(loadTasks, 300));
 filterPriority.addEventListener('change', loadTasks);
@@ -170,6 +238,16 @@ function formatDate(dateString) {
         day: 'numeric',
         month: 'short',
         year: date.getFullYear() !== now.getFullYear() ? 'numeric' : undefined
+    });
+}
+
+function formatDateTime(dateTimeString) {
+    const date = new Date(dateTimeString);
+    return date.toLocaleDateString('en-GB', {
+        day: 'numeric',
+        month: 'short',
+        hour: '2-digit',
+        minute: '2-digit'
     });
 }
 
