@@ -11,7 +11,7 @@ A practice Spring Boot REST API for task management.
 - Custom exception handling
 - Layered architecture (Controller → Service → Repository)
 
-## Tech Stack
+## Technologies Used
 - Java 21
 - Spring Boot
 - Spring Data JPA
